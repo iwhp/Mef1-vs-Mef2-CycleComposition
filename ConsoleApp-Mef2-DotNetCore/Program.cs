@@ -6,8 +6,8 @@ namespace ConsoleApp_Mef2_DotNetCore
     {
         private static void Main(string[] args)
         {
-            ContainerConfiguration configuration = new ContainerConfiguration().WithAssembly(typeof(Program).Assembly);
-            CompositionHost compositionHost = configuration.CreateContainer();
+            ContainerConfiguration containerConfiguration = new ContainerConfiguration().WithAssembly(typeof(Program).Assembly);
+            CompositionHost compositionHost = containerConfiguration.CreateContainer();
 
             {
                 ClassA classA = compositionHost.GetExport<ClassA>();
