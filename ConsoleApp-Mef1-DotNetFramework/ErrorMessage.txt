@@ -1,0 +1,612 @@
+﻿
+When not using [Lazy<>] on one side (not both sides needed), one gets the following error:
+
+
+
+
+The composition produced a single composition error. The root cause is provided below. Review the CompositionException.Errors property for more detailed information.
+
+1) The composition failed because it did not complete within '100' iterations. This is most likely caused by a cycle in the dependency graph of a part which is marked with a non-shared creation policy.
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassC'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassC -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot set import 'ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC")' on part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA.ClassC (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassC") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+
+Resulting in: Cannot get export 'ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA")' from part 'ConsoleApp_Mef1_DotNetFramework.ClassA'.
+Element: ConsoleApp_Mef1_DotNetFramework.ClassA (ContractName="ConsoleApp_Mef1_DotNetFramework.ClassA") -->  ConsoleApp_Mef1_DotNetFramework.ClassA -->  AssemblyCatalog (Assembly="ConsoleApp-Mef1-DotNetFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")

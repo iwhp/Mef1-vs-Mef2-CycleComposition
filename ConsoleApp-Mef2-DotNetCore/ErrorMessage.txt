@@ -1,0 +1,20 @@
+﻿Unhandled Exception: System.Composition.Hosting.CompositionFailedException: Detected an unsupported cycle for part 'ClassA'. To construct a valid cycle, at least one part in the cycle must be shared, and at least one import in the cycle must be non-prerequisite (e.g. a property).
+ -> required by import 'value' of part 'Lazy<ClassA>'
+ -> required by import 'ClassA' of part 'ClassB'
+ -> required by import 'value' of part 'Lazy<ClassB>'
+ -> required by import 'ClassB' of part 'ClassA'
+ -> required by initial request for contract 'ClassA'
+   at System.Composition.Hosting.Core.ExportDescriptorRegistryUpdate.CheckDependency(CompositionDependency dependency, HashSet`1 checked, Stack`1 checking)
+   at System.Composition.Hosting.Core.ExportDescriptorRegistryUpdate.CheckTarget(CompositionDependency dependency, HashSet`1 checked, Stack`1 checking)
+   at System.Composition.Hosting.Core.ExportDescriptorRegistryUpdate.CheckDependency(CompositionDependency dependency, HashSet`1 checked, Stack`1 checking)
+   at System.Composition.Hosting.Core.ExportDescriptorRegistryUpdate.CheckTarget(CompositionDependency dependency, HashSet`1 checked, Stack`1 checking)
+   at System.Composition.Hosting.Core.ExportDescriptorRegistryUpdate.CheckDependency(CompositionDependency dependency, HashSet`1 checked, Stack`1 checking)
+   at System.Composition.Hosting.Core.ExportDescriptorRegistryUpdate.CheckTarget(CompositionDependency dependency, HashSet`1 checked, Stack`1 checking)
+   at System.Composition.Hosting.Core.ExportDescriptorRegistryUpdate.CheckDependency(CompositionDependency dependency, HashSet`1 checked, Stack`1 checking)
+   at System.Composition.Hosting.Core.ExportDescriptorRegistryUpdate.CheckTarget(CompositionDependency dependency, HashSet`1 checked, Stack`1 checking)
+   at System.Composition.Hosting.Core.ExportDescriptorRegistryUpdate.Execute(CompositionContract contract)
+   at System.Composition.Hosting.Core.ExportDescriptorRegistry.TryGetSingleForExport(CompositionContract exportKey, ExportDescriptor& defaultForExport)
+   at System.Composition.Hosting.Core.LifetimeContext.TryGetExport(CompositionContract contract, Object& export)
+   at System.Composition.CompositionContext.GetExport(CompositionContract contract)
+   at System.Composition.CompositionContext.GetExport[TExport](String contractName)
+   at ConsoleApp_Mef2_DotNetCore.Program.Main(String[] args) in D:\CODE\Git.Github\iwhp\Mef1-vs-Mef2-CycleComposition\ConsoleApp-Mef2-DotNetCore\Program.cs:line 13
